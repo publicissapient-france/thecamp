@@ -25,7 +25,7 @@ rabbitMQ.subscribeQueue(msg => {
     const action = JSON.parse(msg);
     switch (action.type) {
       case GET_BOOKINGS_SSE: {
-        logger2.info('Need to SSE this action', GET_BOOKINGS_SSE);
+        // logger2.info('Need to SSE this action', GET_BOOKINGS_SSE);
         // noinspection JSCheckFunctionSignatures
         sse.send(action.payload, 'bookings');
         return;

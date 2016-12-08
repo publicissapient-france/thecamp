@@ -1,19 +1,53 @@
 version: '2'
 services:
-  redis:
+  rabbitmq:
+    image: rabbitmq
+    container_name: thecamp_rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: xebia
+      RABBITMQ_DEFAULT_PASS: xebia2015
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  postgres:
     image: postgres
+    container_name: thecamp_postgres
     ports:
       - "5432:5432"
-    environnement:
+    environment:
       POSTGRES_PASSWORD: xebia2015
       POSTGRES_USER: xebia
       POSTGRES_DB: thecamp_db
+  thecamp-proto-web:
+    build:
+      context: ./thecamp-proto-web
+      dockerfile: Dockerfile
+    depends_on:
+      - rabbitmq
+    container_name: thecamp_proto_web
+    environment:
+      RABBIT_HOST: rabbitmq
+      RABBIT_EXCHANGE: thecampExchange
+    ports:
+      - "3000:80"
+    links:
+      - rabbitmq
+  thecamp-proto-db:
+    build:
+      context: ./thecamp-proto-db
+      dockerfile: Dockerfile
+    depends_on:
+      - rabbitmq
+      - postgres
+    container_name: thecamp_proto_db
+    environment:
+      RABBIT_HOST: rabbitmq
+      RABBIT_EXCHANGE: thecampExchange    
+      POSTGRES_HOST: postgres
+      POSTGRES_PASSWORD: xebia2015
+      POSTGRES_USER: xebia
+      POSTGRES_DB: thecamp_db
+    links:
+      - rabbitmq
+      - postgres
       
-#  thecamp-proto-web:
-#    build:
-#      context: ./thecamp-proto-web/Dockerfile 
-#    environment:
-#      NODE_ENV: production
-#      REDIS_HOST: redis
-#      REDIS_PORT: 6379
-#      RABBIT_EXCHANGE: thecampExchange

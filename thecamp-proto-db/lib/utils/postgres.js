@@ -11,10 +11,10 @@ class Postgres {
     const dbConfig = {
       client: 'pg',
       connection: {
-        host: '127.0.0.1',
-        user: config.get('postgres.user'),
-        password: config.get('postgres.password'),
-        database: config.get('postgres.database')
+        host: process.env.POSTGRES_HOST || config.get('postgres.host'),
+        user: process.env.POSTGRES_USER || config.get('postgres.user'),
+        password: process.env.POSTGRES_PASSWORD || config.get('postgres.password'),
+        database: process.env.POSTGRES_DB || config.get('postgres.database')
       }
     };
     this.knex = db(dbConfig);

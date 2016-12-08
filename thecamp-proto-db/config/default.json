@@ -14,6 +14,7 @@
     "exchangeProducer": "thecamp_exchange"
   },
   "postgres" : {
+    "host": "127.0.0.1",
     "user": "xebia",
     "password": "xebia2015",
     "database": "thecamp_db",
