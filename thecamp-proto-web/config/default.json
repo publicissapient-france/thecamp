@@ -1,0 +1,10 @@
+{
+  "rabbitMQ": {
+    "host": "",
+    "user": "xebia",
+    "password": "xebia2015",
+    "queue": "thecamp_web_queue",
+    "exchangeConsumer": "thecamp_exchange",
+    "exchangeProducer": "thecamp_exchange"
+  }
+}

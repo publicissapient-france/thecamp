@@ -1,0 +1,19 @@
+version: '2'
+services:
+  redis:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environnement:
+      POSTGRES_PASSWORD: xebia2015
+      POSTGRES_USER: xebia
+      POSTGRES_DB: thecamp_db
+      
+#  thecamp-proto-web:
+#    build:
+#      context: ./thecamp-proto-web/Dockerfile 
+#    environment:
+#      NODE_ENV: production
+#      REDIS_HOST: redis
+#      REDIS_PORT: 6379
+#      RABBIT_EXCHANGE: thecampExchange

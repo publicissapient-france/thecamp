@@ -1,0 +1,27 @@
+{
+  "logger": {
+    "threshold": "debug",
+    "console": {
+      "level": "debug"
+    }
+  },
+  "rabbitMQ": {
+    "host": "",
+    "user": "xebia",
+    "password": "xebia2015",
+    "queue": "thecamp_db_queue",
+    "exchangeConsumer": "thecamp_exchange",
+    "exchangeProducer": "thecamp_exchange"
+  },
+  "postgres" : {
+    "user": "xebia",
+    "password": "xebia2015",
+    "database": "thecamp_db",
+    "tables": {
+      "booking": "booking"
+    }
+  },
+  "middleware": {
+
+  }
+}
