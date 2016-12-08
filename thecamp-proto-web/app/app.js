@@ -60,7 +60,7 @@ const rootRoute = {
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-const render = (translatedMessages) => {
+const render = translatedMessages => {
   ReactDOM.render(
     <MuiThemeProvider>
       <Provider store={store}>
@@ -99,7 +99,7 @@ if (!window.Intl) {
       System.import('intl/locale-data/jsonp/de.js'),
     ]))
     .then(() => render(translationMessages))
-    .catch((err) => {
+    .catch(err => {
       throw err;
     });
 } else {

@@ -9,6 +9,7 @@ const logger = require('./utils').logger;
 const rabbitMQ = require('./utils').rabbitMQ;
 
 const BOOKING_EVENT_REQUEST = 'BOOKING_EVENT_REQUEST';
+const GET_BOOKINGS_REQUEST = 'GET_BOOKINGS_REQUEST';
 const GET_BOOKINGS_SSE = 'GET_BOOKINGS_SSE';
 
 class Middleware {
@@ -62,11 +63,13 @@ class Middleware {
       .then(() => {
         try {
           const action = JSON.parse(event);
-          logger.debug('RabbitMQ msg:', action);
           switch (action.type) {
             case BOOKING_EVENT_REQUEST:
               return database.addBooking(action.payload)
                 .then(() => database.getBookings())
+                .then(bookings => this.sendMessage({ type: GET_BOOKINGS_SSE, payload: bookings }));
+            case GET_BOOKINGS_REQUEST:
+              return database.getBookings()
                 .then(bookings => this.sendMessage({ type: GET_BOOKINGS_SSE, payload: bookings }));
             default:
               return logger.info('got a msg');

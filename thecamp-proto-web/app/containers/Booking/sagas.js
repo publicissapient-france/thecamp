@@ -11,7 +11,7 @@ const headers = { Accept: 'application/json', 'Content-Type': 'application/json'
 export function* bookEvent(action) {
   const { event } = action;
   const options = { method: 'POST', headers, body: JSON.stringify(event) };
-  const response = yield call(request, `/api/booking`, options);
+  const response = yield call(request, '/api/booking', options);
 
   if (!response.error) {
     yield put(bookEventSuccess());
