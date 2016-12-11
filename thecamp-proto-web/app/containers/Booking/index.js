@@ -26,12 +26,13 @@ export class Booking extends React.Component {
   static propTypes = {
     bookEvent: React.PropTypes.func,
   };
-  
+
   componentWillMount() {
     const nextWeek = new Date();
     nextWeek.setDate(nextWeek.getDate() + 7);
     this.state = {
-      offer: 'offer-1',
+      client: '',
+      offer: 'TJ1',
       from: new Date(),
       to: nextWeek,
       keynote: true,
@@ -51,7 +52,7 @@ export class Booking extends React.Component {
     const { offer, from, to, keynote, workshop, simpleRoom, quantity } = this.state;
     const days = Math.floor((to - from) / (1000 * 60 * 60 * 24));
     if (offer) {
-      price += offer === 'offer-1' ? 1000 : 1500;
+      price += offer === 'TJ1' ? 1000 : 1500;
     }
     if (days) {
       price += days * 500;
@@ -96,6 +97,10 @@ export class Booking extends React.Component {
     this.setState({ quantity: value }, () => this.getPrice());
   };
 
+  handleNameChange = event => {
+    this.setState({ client: event.target.value });
+  };
+
   render() {
     const toggleStyles = {
       toggle: {
@@ -121,9 +126,19 @@ export class Booking extends React.Component {
             <form onSubmit={this.bookEvent}>
               <div className="row">
                 <div className="col-xs-12">
+                  <TextField
+                    id="client"
+                    floatingLabelText="Customer Name"
+                    value={this.state.client}
+                    onChange={this.handleNameChange}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-xs-12">
                   <SelectField floatingLabelText="Offer" value={this.state.offer} onChange={this.handleSelectChange}>
-                    <MenuItem value={'offer-1'} primaryText="TJ1" />
-                    <MenuItem value={'offer-2'} primaryText="TJ2" />
+                    <MenuItem value={'TJ1'} primaryText="TJ1" />
+                    <MenuItem value={'TJ2'} primaryText="TJ2" />
                   </SelectField>
                 </div>
               </div>

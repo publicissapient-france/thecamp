@@ -66,8 +66,11 @@ class Middleware {
           switch (action.type) {
             case BOOKING_EVENT_REQUEST:
               return database.addBooking(action.payload)
-                .then(() => database.getBookings())
-                .then(bookings => this.sendMessage({ type: GET_BOOKINGS_SSE, payload: bookings }));
+                .then(event => setTimeout(() => database.generateRooms(event['0'])
+                    .then(() => database.getBookings())
+                    .then(bookings => this.sendMessage({ type: GET_BOOKINGS_SSE, payload: bookings }))
+                    .then(() => logger.info('Sending back the bookings with rooms'))
+                  , 10000));
             case GET_BOOKINGS_REQUEST:
               return database.getBookings()
                 .then(bookings => this.sendMessage({ type: GET_BOOKINGS_SSE, payload: bookings }));

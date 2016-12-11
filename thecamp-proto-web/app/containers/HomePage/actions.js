@@ -1,4 +1,7 @@
-import { EVENT_BOOKINGS_REQUEST, EVENT_BOOKINGS_SUCCESS, EVENT_BOOKINGS_ERROR, BOOKINGS_RECEIVED } from './constants';
+import {
+  EVENT_BOOKINGS_REQUEST, EVENT_BOOKINGS_SUCCESS, EVENT_BOOKINGS_ERROR, BOOKINGS_RECEIVED, CANCEL_BOOKING_REQUEST,
+  CANCEL_BOOKING_SUCCESS, CANCEL_BOOKING_ERROR,
+} from './constants';
 
 export function eventBookingsRequest() {
   return {
@@ -23,5 +26,24 @@ export function bookingsReceived(bookings) {
   return {
     type: BOOKINGS_RECEIVED,
     bookings,
+  };
+}
+
+export function cancelBooking() {
+  return {
+    type: CANCEL_BOOKING_REQUEST,
+  };
+}
+
+export function cancelBookingSuccess() {
+  return {
+    type: CANCEL_BOOKING_SUCCESS,
+  };
+}
+
+export function cancelBookingError(error) {
+  return {
+    type: CANCEL_BOOKING_ERROR,
+    error,
   };
 }

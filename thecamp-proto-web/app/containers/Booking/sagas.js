@@ -1,6 +1,6 @@
 import { takeLatest } from 'redux-saga';
 import { take, call, put, cancel, fork } from 'redux-saga/effects';
-import { LOCATION_CHANGE } from 'react-router-redux';
+import { LOCATION_CHANGE, push } from 'react-router-redux';
 
 import { BOOK_EVENT_REQUEST } from './constants';
 import request from '../../utils/request';
@@ -15,6 +15,7 @@ export function* bookEvent(action) {
 
   if (!response.error) {
     yield put(bookEventSuccess());
+    yield put(push('/'));
   } else {
     yield put(bookEventError(response.err));
   }

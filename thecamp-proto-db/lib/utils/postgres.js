@@ -26,6 +26,7 @@ class Postgres {
     return this.knex.schema.createTableIfNotExists(bookingTable, table => {
       table.increments();
       table.uuid('client_id');
+      table.string('client');
       table.string('offer');
       table.date('from');
       table.date('to');
@@ -34,16 +35,29 @@ class Postgres {
       table.boolean('simpleRoom');
       table.integer('quantity');
       table.float('price');
+      table.string('rooms');
       table.timestamps();
     });
   }
 
   addBooking(event) {
-    return this.knex(bookingTable).insert(event);
+    return this.knex(bookingTable).insert(event, ['id', 'quantity']);
   }
 
   getBookings() {
     return this.knex(bookingTable).select();
+  }
+
+  generateRooms(event) {
+    const firstRoom = Math.floor(Math.random() * (500 - 100) + 100);
+    const roomsTab = [firstRoom];
+    for (let i = 1; i < event.quantity; i++) {
+      roomsTab.push(firstRoom + i);
+    }
+    const str = roomsTab.reduceRight((item, old) => `${old}, ${item}`, '');
+    const rooms = str.substring(0, str.length - 2);
+    return this.knex(bookingTable).where('id', event.id).update({ rooms })
+      .then(result => logger.info(result));
   }
 
 }
