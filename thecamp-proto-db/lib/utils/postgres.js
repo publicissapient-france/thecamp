@@ -60,6 +60,10 @@ class Postgres {
       .then(result => logger.info(result));
   }
 
+  cancelBooking(id) {
+    return this.knex(bookingTable).where('id', id).del();
+  }
+
 }
 
 const postgres = new Postgres();

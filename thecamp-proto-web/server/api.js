@@ -15,4 +15,10 @@ router.get('/booking', (req, res) =>
     .catch(err => res.status(503).send(err))
 );
 
+router.delete('/booking/:id', (req, res) =>
+  rabbitMQ.postMessage({ type: 'CANCEL_BOOKINGS_REQUEST', payload: { id: req.params.id } })
+    .then(() => res.status(202).end())
+    .catch(err => res.status(503).send(err))
+);
+
 module.exports = router;

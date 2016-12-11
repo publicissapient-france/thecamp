@@ -38,6 +38,18 @@ class HomePage extends React.PureComponent {
     this.props.eventBookingsRequest();
   }
 
+  cancelBooking = event => {
+    logger.info('event:', event);
+    const currentBookings = this.props.bookings;
+    logger.info('currentBookings:', currentBookings);
+    // const index = currentBookings.find(item => item.id === event.id);
+    const index = currentBookings.indexOf(event);
+    logger.info('index:', index);
+    currentBookings.splice(index, 1);
+    logger.info(currentBookings);
+    this.props.cancelBooking(event.id, currentBookings);
+  };
+
   render() {
     const { bookings } = this.props;
     const Bookings = bookings ? bookings.map((item, index) => {
@@ -80,7 +92,7 @@ class HomePage extends React.PureComponent {
               </div>
             </CardText>
             <CardActions>
-              <FlatButton label="Cancel" secondary onClick={this.props.cancelBooking} />
+              <FlatButton label="Cancel" secondary onClick={() => this.cancelBooking(item)} />
               <FlatButton label="Update" primary onClick={this.props.eventBookingsRequest} />
             </CardActions>
           </Card>
@@ -90,7 +102,7 @@ class HomePage extends React.PureComponent {
     return (
       <div className={styles.homepage}>
         <h1>
-          Welcome to TheCamp
+          Welcome to TheCamp Booking
         </h1>
         <div className="row">
           {Bookings}
@@ -120,8 +132,8 @@ function mapDispatchToProps(dispatch) {
     bookingsReceived(bookings) {
       dispatch(bookingsReceived(bookings));
     },
-    cancelBooking(id) {
-      dispatch(cancelBooking(id));
+    cancelBooking(id, nextBookings) {
+      dispatch(cancelBooking(id, nextBookings));
     },
   };
 }

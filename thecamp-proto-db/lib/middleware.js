@@ -10,6 +10,7 @@ const rabbitMQ = require('./utils').rabbitMQ;
 
 const BOOKING_EVENT_REQUEST = 'BOOKING_EVENT_REQUEST';
 const GET_BOOKINGS_REQUEST = 'GET_BOOKINGS_REQUEST';
+const CANCEL_BOOKINGS_REQUEST = 'CANCEL_BOOKINGS_REQUEST';
 const GET_BOOKINGS_SSE = 'GET_BOOKINGS_SSE';
 
 class Middleware {
@@ -73,6 +74,10 @@ class Middleware {
                   , 10000));
             case GET_BOOKINGS_REQUEST:
               return database.getBookings()
+                .then(bookings => this.sendMessage({ type: GET_BOOKINGS_SSE, payload: bookings }));
+            case CANCEL_BOOKINGS_REQUEST:
+              return database.cancelBooking(action.payload.id)
+                .then(() => database.getBookings())
                 .then(bookings => this.sendMessage({ type: GET_BOOKINGS_SSE, payload: bookings }));
             default:
               return logger.info('got a msg');

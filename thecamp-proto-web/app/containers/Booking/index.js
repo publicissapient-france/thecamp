@@ -148,6 +148,7 @@ export class Booking extends React.Component {
                     onChange={this.handleChangeFromDate}
                     floatingLabelText="From"
                     defaultDate={this.state.from}
+                    autoOk
                   />
                 </div>
               </div>
@@ -157,6 +158,7 @@ export class Booking extends React.Component {
                     onChange={this.handleChangeToDate}
                     floatingLabelText="To"
                     defaultDate={this.state.to}
+                    autoOk
                   />
                 </div>
               </div>

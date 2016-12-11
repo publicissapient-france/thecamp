@@ -29,15 +29,18 @@ export function bookingsReceived(bookings) {
   };
 }
 
-export function cancelBooking() {
+export function cancelBooking(id, nextBookings) {
   return {
     type: CANCEL_BOOKING_REQUEST,
+    id,
+    nextBookings,
   };
 }
 
-export function cancelBookingSuccess() {
+export function cancelBookingSuccess(bookings) {
   return {
     type: CANCEL_BOOKING_SUCCESS,
+    bookings,
   };
 }
 
