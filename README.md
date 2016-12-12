@@ -4,7 +4,7 @@
 
 ### Checkout project
 
-`$ git clone xxx --depth`
+`$ git clone https://github.com/xebia-france/thecamp.git`
 
 ### Directory
 
@@ -27,7 +27,7 @@ All the applications can be build with containers.
 
 ### RabbitMQ and Postgres Docker images
 
-`docker run --name thecamp-rabbit -e RABBITMQ_DEFAULT_USER=xebia -e RABBITMQ_DEFAULT_PASS=xebia2015 -p 5672:5672 -p 15672:15672 -d rabbit`
+`docker run --name thecamp-rabbit -e RABBITMQ_DEFAULT_USER=xebia -e RABBITMQ_DEFAULT_PASS=xebia2015 -p 5672:5672 -p 15672:15672 -d rabbitmq`
 
 `docker run --name thecamp-db -e POSTGRES_PASSWORD=xebia2015 -e POSTGRES_USER=xebia -e POSTGRES_DB=thecamp_db -d postgres`
 
