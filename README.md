@@ -47,3 +47,9 @@ All the applications can be build with containers.
 - Create Booking Page
 - Implements API calls
 - Add SSE (Server Side Event) on server and client
+
+### Container
+
+- Create a Dockerfile per applications
+- Create a `docker-compose.yml` using the 2 Dockerfile and the 2 other images
+- Run
