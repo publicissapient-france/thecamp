@@ -7,16 +7,16 @@
   },
   "rabbitMQ": {
     "host": "",
-    "user": "xebia",
-    "password": "xebia2015",
+    "user": "",
+    "password": "",
     "queue": "thecamp_db_queue",
     "exchangeConsumer": "thecamp_exchange",
     "exchangeProducer": "thecamp_exchange"
   },
   "postgres" : {
     "host": "127.0.0.1",
-    "user": "xebia",
-    "password": "xebia2015",
+    "user": "",
+    "password": "",
     "database": "thecamp_db",
     "tables": {
       "booking": "booking"
