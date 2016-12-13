@@ -27,7 +27,7 @@ All the applications can be build with containers.
 
 ### RabbitMQ and Postgres Docker images
 
-`docker run --name thecamp-rabbit -e RABBITMQ_DEFAULT_USER=AAAA -e RABBITMQ_DEFAULT_PASS=AAAA -p 5672:5672 -p 15672:15672 -d rabbitmq`
+`docker run --name thecamp-rabbit -e RABBITMQ_DEFAULT_USER=AAAA -e RABBITMQ_DEFAULT_PASS=AAAA -p 5672:5672 -p 15672:15672 -d rabbitmq:3-management`
 
 `docker run --name thecamp-db -e POSTGRES_PASSWORD=AAAA -e POSTGRES_USER=AAAA -e POSTGRES_DB=thecamp_db -d postgres`
 
