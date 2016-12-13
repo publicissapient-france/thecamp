@@ -23,6 +23,21 @@ All the applications can be build with containers.
 
 `$ docker-compose up -d --build`
 
+## Prerequisites to run locally
+
+### Nodejs V6
+
+Nodejs is required, it can be installed with `brew` (MAC OS) or with `nvm` (recommended) or via exec, pkg etc. The method with `nvm` is recommended because it does not install many files in multiple directory and you can manage your `nodejs` versions easily.
+
+[NVM Github to know how to install it](https://github.com/creationix/nvm)
+
+Those command lines will install `NodeJS v6.9.1` and will this version the defaulted one.
+
+```
+$ nvm install 6.9.1
+$ nvm alias default 6.9.1
+```
+
 ## How-to
 
 ### RabbitMQ and Postgres Docker images
